@@ -16,6 +16,11 @@
 
 #pragma once
 
+#define TAPPING_TERM 200
+#define PERMISSIVE_HOLD
+#define IGNORE_MOD_TAP_INTERRRUPT
+#define RETRO_TAPPING
+
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
 #endif
