@@ -37,20 +37,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Base Layer: QWERTY
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  ` ~   |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  \ |   |
+ * |  ` ~   |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  -_    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * | LShift |   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : | ' / Sft|
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LAlt   |   Z  |   X  |   C  |   V  |   B  |  =+  | Caps |  | RALT |  -_  |   N  |   M  | ,  < | . >  | /  ? | RCtrl  |
+ * | LAlt   |   Z  |   X  |   C  |   V  |   B  |  =+  | Caps |  | Menu |  \|  |   N  |   M  | ,  < | . >  | /  ? | RCtrl  |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | Menu |  Fun | Del  |BSpace| Esc  |  | Enter| Space| Tab  |  Fun | RTENC|
+ *                        | App  |  Fun | Del  |BSpace| Esc  |  | Enter| Space| Tab  |  Fun | REnc |
  *                        |      |      | Raise|      | Ctrl |  | Lower| LGui | Raise|      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
-      KC_GRV,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,  KC_I,    KC_O,    KC_P,    KC_BSLS,
+      KC_GRV,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,  KC_I,    KC_O,    KC_P,    KC_MINS,
       KC_LSFT, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,  KC_K,    KC_L,    KC_SCLN, SHT_QUO,
-      OSM_ALT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_EQL,  KC_CAPS,  OSMRALT,  KC_MINS, KC_N,    KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_LCTL,
+      OSM_ALT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_EQL,  KC_CAPS,  KC_MENU,  KC_BSLS, KC_N,    KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_RCTL,
                                KC_APP, FUN,    DELRAI, KC_BSPC, CTL_ESC,  ENT_LOW,  SPC_GUI, RAI_TAB, FUN,   _______
     ),
 /*
