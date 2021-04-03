@@ -25,10 +25,10 @@ enum layers {
     _QWERTY = 0,
     _LOWER,
     _RAISE,
-    _FUNCTION
+    _FUNCTION,
 };
 
-#define FUN MO(_FUNCTION)
+#define FUNC_L OSL(_FUNCTION)
 #define DELRAI LT(_RAISE, KC_DEL)
 #define CTL_ESC CTL_T(KC_ESC)
 #define OSM_ALT OSM(MOD_LALT)
@@ -36,7 +36,7 @@ enum layers {
 #define ENT_LOW LT(_LOWER, KC_ENT)
 #define SPC_GUI RGUI_T(KC_SPC)
 #define RAI_TAB LT(_RAISE, KC_TAB)
-#define SHT_QUO SFT_T(KC_QUOT)
+#define CTL_QUO CTL_T(KC_QUOT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
@@ -45,22 +45,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |  ` ~   |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  -_    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * | LShift |   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : | ' / Sft|
+ * | LShift |   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : | ' / CTL|
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LAlt   |   Z  |   X  |   C  |   V  |   B  |  =+  | Caps |  | Menu |  \|  |   N  |   M  | ,  < | . >  | /  ? | RCtrl  |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | App  |  Fun | Del  |BSpace| Esc  |  | Enter| Space| Tab  |  Fun | REnc |
+ *                        | F13  |  Fun | Del  |BSpace| Esc  |  | Enter| Space| Tab  |  Fun | REnc |
  *                        |      |      | Raise|      | Ctrl |  | Lower| LGui | Raise|      | MPly |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
       KC_GRV,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,  KC_I,    KC_O,    KC_P,    KC_MINS,
-      KC_LSFT, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,  KC_K,    KC_L,    KC_SCLN, SHT_QUO,
-      OSM_ALT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_EQL,  KC_CAPS,  KC_MENU,  KC_BSLS, KC_N,    KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_RCTL,
-                               KC_APP, FUN,    DELRAI, KC_BSPC, CTL_ESC,  ENT_LOW,  SPC_GUI, RAI_TAB, FUN,   KC_MPLY
+      KC_LCTL, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,  KC_K,    KC_L,    KC_SCLN, CTL_QUO,
+      KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_EQL,  KC_CAPS,  KC_F14,   KC_BSLS, KC_N,    KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+                               KC_F15, OSM_ALT,DELRAI, KC_BSPC, CTL_ESC,  ENT_LOW,  SPC_GUI, RAI_TAB, FUNC_L,KC_MPLY
     ),
 /*
- * Lower Layer: Symbols
+ * Raise Layer: Symbols
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |        |   1  |  2   |  3   |  4   |  5   |                              |  6   |  7   |  8   |  9   |  0   |        |
@@ -73,14 +73,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_LOWER] = LAYOUT(
+    [_RAISE] = LAYOUT(
       _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
       _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_LBRC, KC_RBRC, _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_MSEL
     ),
 /*
- * Raise Layer: Number keys, media, navigation
+ * Lower Layer: Number keys, media, navigation
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |        |      |      | PgUp |      |      |                              |      |      |      |      |      |        |
@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_RAISE] = LAYOUT(
+    [_LOWER] = LAYOUT(
       _______, _______, _______, KC_PGUP, _______, _______,                                     _______, _______, _______, _______, _______, _______,
       KC_CAPS, _______, KC_HOME, KC_PGDN, KC_END,  _______,                                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_BTN1, _______,
@@ -140,10 +140,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 //     ),
 };
-
-layer_state_t layer_state_set_user(layer_state_t state) {
-    return update_tri_layer_state(state, _LOWER, _RAISE, _FUNCTION);
-}
 
 #ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -324,17 +320,18 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   switch (get_highest_layer(layer_state)) {
     case _QWERTY:
       if (clockwise) {
-        tap_code(KC_VOLU);
-      } else {
         tap_code(KC_VOLD);
+      } else {
+        tap_code(KC_VOLU);
       }
       break;
     default:
       if (clockwise) {
-        tap_code(KC_PGDN);
+          tap_code(KC_WH_D);
       } else {
-        tap_code(KC_PGUP);
+        tap_code(KC_WH_U);
       }
   }
 }
+
 #endif
