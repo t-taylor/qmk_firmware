@@ -33,6 +33,9 @@
   #define RGBLIGHT_LIMIT_VAL 150
 #endif
 
+#define MOUSEKEY_MAX_SPEED 40
+#define MOUSEKEY_TIME_TO_MAX 15
+
 // If you are using an Elite C rev3 on the slave side, uncomment the lines below:
 // #define SPLIT_USB_DETECT
 // #define NO_USB_STARTUP_CHECK
