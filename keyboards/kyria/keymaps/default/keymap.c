@@ -23,6 +23,7 @@ char wpm_str[10];
 
 enum layers {
     _QWERTY = 0,
+    _COLEMAK,
     _LOWER,
     _RAISE,
     _FUNCTION,
@@ -51,20 +52,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Base Layer: QWERTY
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  ` ~   |   Q  |   W  |   F  |   P  |   B  |                              |   J  |   L  |   U  |   Y  |   ;  |  -_    |
+ * |  ` ~   |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  -_    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * | LShift |   A  |   R  |   S  |   T  |   G  |                              |   M  |   N  |   E  |   I  |   O  | ' / CTL|
+ * | LShift |   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : | ' / CTL|
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LAlt   |   Z  |   X  |   C  |   D  |   V  |  =+  | Caps |  | Menu |  \|  |   K  |   H  | ,  < | . >  | /  ? | RShft  |
+ * | LAlt   |   Z  |   X  |   C  |   V  |   B  |  =+  | Caps |  | cole |  \|  |   N  |   M  | ,  < | . >  | /  ? | RShft  |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        | F13  |  Alt | Ctrl | Shift| Esc  |  | Enter| Space| Back |  Fun | REnc |
  *                        |      |      |      |      | Raise|  | Lower| LGui |      |      | MPly |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
+      KC_TAB,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,  KC_I,    KC_O,    KC_P,    KC_MINS,
+      KC_LCTL, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,  KC_K,    KC_L,    KC_SCLN, CTL_QUO,
+      KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_EQL,  KC_CAPS,  TO(_COLEMAK),   KC_BSLS, KC_N,    KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+                               KC_F15, OSM_ALT,LT(_RAISE, KC_DEL), CTL_T(KC_BSPC),SFT_T(KC_ESC), ENT_LOW,  SPC_GUI, TAB_RAI, FUNC_L,KC_MPLY
+    ),
+/*
+ * Alt base Layer: Colemak-DH
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |  ` ~   |   Q  |   W  |   F  |   P  |   B  |                              |   J  |   L  |   U  |   Y  |   ;  |  -_    |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * | LShift |   A  |   R  |   S  |   T  |   G  |                              |   M  |   N  |   E  |   I  |   O  | ' / CTL|
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * | LAlt   |   Z  |   X  |   C  |   D  |   V  |  =+  | Caps |  | qwer |  \|  |   K  |   H  | ,  < | . >  | /  ? | RShft  |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        | F13  |  Alt | Ctrl | Shift| Esc  |  | Enter| Space| Back |  Fun | REnc |
+ *                        |      |      |      |      | Raise|  | Lower| LGui |      |      | MPly |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_COLEMAK] = LAYOUT(
       KC_TAB,  KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,                                         KC_J,    KC_L,  KC_U,    KC_Y,    KC_SCLN, KC_MINS,
       KC_LCTL, KC_A,   KC_R,   KC_S,   KC_T,   KC_G,                                         KC_M,    KC_N,  KC_E,    KC_I,    KC_O,    CTL_QUO,
-      KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,   KC_EQL,  KC_CAPS,  KC_F14,   KC_BSLS, KC_K,    KC_H,  KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+      KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,   KC_EQL,  KC_CAPS,  TG(_COLEMAK),   KC_BSLS, KC_K,    KC_H,  KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                                KC_F15, OSM_ALT,LT(_RAISE, KC_DEL), CTL_T(KC_BSPC),SFT_T(KC_ESC), ENT_LOW,  SPC_GUI, TAB_RAI, FUNC_L,KC_MPLY
     ),
 /*
@@ -180,6 +201,9 @@ static void render_status(void) {
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
             oled_write_P(PSTR("Default\n"), false);
+            break;
+        case _COLEMAK:
+            oled_write_P(PSTR("Colemak-DH\n"), false);
             break;
         case _LOWER:
             oled_write_P(PSTR("Lower\n"), false);
