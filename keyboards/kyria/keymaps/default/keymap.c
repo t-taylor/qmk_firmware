@@ -43,6 +43,7 @@ enum layers {
 #define ENT_RAI LT(_RAISE, KC_ENT)
 #define ENT_SFT SFT_T(KC_ENT)
 #define SPC_GUI RGUI_T(KC_SPC)
+#define SPC_ALT LALT_T(KC_SPC)
 #define RAI_TAB LT(_RAISE, KC_TAB)
 #define CTL_QUO CTL_T(KC_QUOT)
 
@@ -64,8 +65,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT(
       KC_TAB,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,  KC_I,    KC_O,    KC_P,    KC_MINS,
       KC_LCTL, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,  KC_K,    KC_L,    KC_SCLN, CTL_QUO,
-      KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_EQL,  KC_CAPS,  TO(_COLEMAK),   KC_BSLS, KC_N,    KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                               KC_F15, OSM_ALT,LT(_RAISE, KC_DEL), CTL_T(KC_BSPC),SFT_T(KC_ESC), ENT_LOW,  SPC_GUI, TAB_RAI, FUNC_L,KC_MPLY
+      KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_EQL,  KC_CAPS,  KC_LGUI,   KC_BSLS, KC_N,    KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+                               KC_F15, OSM_ALT,LT(_RAISE, KC_DEL), CTL_T(KC_BSPC),SFT_T(KC_ESC), ENT_LOW,  SPC_ALT, TAB_RAI, FUNC_L,KC_MPLY
     ),
 /*
  * Raise Layer: Symbols
@@ -145,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TAB,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,  KC_I,    KC_O,    KC_P,    KC_MINS,
       KC_LCTL, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,  KC_K,    KC_L,    KC_SCLN, CTL_QUO,
       KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_EQL,  TG(_GAME),  KC_F14,   KC_BSLS, KC_N,    KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                               KC_F15, OSM_ALT,KC_DEL, KC_BSPC, KC_ESC,   KC_ENT,   SPC_GUI, KC_TAB,  FUNC_L,KC_MPLY
+                               KC_F15, OSM_ALT,KC_DEL, KC_BSPC, KC_ESC,   KC_ENT,   SPC_ALT, KC_TAB,  FUNC_L,KC_MPLY
     ),
 // /*
 //  * Layer template
@@ -180,9 +181,6 @@ static void render_status(void) {
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
             oled_write_P(PSTR("Default\n"), false);
-            break;
-        case _COLEMAK:
-            oled_write_P(PSTR("Colemak-DH\n"), false);
             break;
         case _LOWER:
             oled_write_P(PSTR("Lower\n"), false);
